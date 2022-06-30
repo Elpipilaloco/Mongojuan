@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-5">
+            <div class="card card-boy p-4 text-white">
+                <h3>Añade una tarea</h3>
+                <form action="/tasks/add" method="post">
+                    <div>
+                        <label for="title">Escribe un titulo</label>
+                        <input class="form-control bg-light text-white" type="text" name="title" placeholder="Titulo"
+                            id="title">
+                    </div>
+                    <div>
+                        <label for="description">Escribe la descripcion</label>
+                        <textarea class="form-control bg-light text-white" name="description" id="description"
+                            placeholder="Descripcion"></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-sm mt-2">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            {{#if tasks}}
+
+            <table class="table table-bordered table-hover table-light">
+                <thead>
+                    <tr>
+                        <th>N.</th>
+                        <th>Titulo</th>
+                        <th>Descripcion</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each tasks}}
+                    <tr>
+                        <td>{{@index}}</td>
+                        <td>{{title}}</td>
+                        <td>{{description}}</td>
+                        <td>
+                            {{#if done}}
+                            <a href="/tasks/{{_id}}/toggleDone" class="btn btn-info">Me falta</a>
+                            {{else}}
+                            <a href="/tasks/{{_id}}/toggleDone" class="btn btn-success">Listo</a>
+                            {{/if}}
+                            <a href="/tasks/{{_id}}/delete" class="btn btn-danger">Eliminar</a>
+                            <a href="/tasks/{{_id}}/edit" class="btn btn-primary">Editar</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+
+            {{else}}
+
+            <div class="text-center text-white">
+                <h1>No hay tareas</h1>
+                <img src="https://c.tenor.com/JikaSIaiY7gAAAAC/cara-amarilla-muriendo.gif" alt="">
+            </div>
+
+            {{/if}}
+        </div>
+    </div>
+</div>
